@@ -114,7 +114,7 @@ export const CalculationForm: React.FC = () => {
       <header className="app-header">
         <div className="header-brand">
           <div className="header-icon">
-            <Calculator size={22} />
+            <Calculator size={20} />
           </div>
           <input
             type="text"
@@ -127,82 +127,84 @@ export const CalculationForm: React.FC = () => {
 
         <div className="header-actions">
           <button type="button" className="btn btn-secondary" onClick={handleExportPDF}>
-            <FileText size={16} /> Download PDF
+            <FileText size={15} /> Download PDF
           </button>
           <button type="button" className="btn btn-primary" onClick={handleSaveRecord}>
-            <Save size={16} /> Save State
+            <Save size={15} /> Save State
           </button>
           <button type="button" className="btn btn-secondary" onClick={handleResetBaseline} title="Reset Baseline">
-            <RotateCcw size={16} /> Baseline
+            <RotateCcw size={15} /> Baseline
           </button>
         </div>
       </header>
 
-      {/* Main Single-Page Calculation Form Grid */}
-      <main className="form-grid">
-        {/* PART A COLUMN */}
-        <section className="part-card part-a">
-          <div className="part-header">
-            <h2 className="part-title">PART A</h2>
-          </div>
+      {/* Main Single-Page Calculation Form Grid (Preserves PC Side-by-Side Layout Proportions) */}
+      <main className="form-grid-wrapper">
+        <div className="form-grid">
+          {/* PART A COLUMN */}
+          <section className="part-card part-a">
+            <div className="part-header">
+              <h2 className="part-title">PART A</h2>
+            </div>
 
-          {/* Part A Main Products Table (Editable, Add/Delete Enabled) */}
-          <ProductTable
-            title="Part A Products"
-            rows={data.partA.products}
-            amounts={result.partA.productAmounts}
-            totalQty={result.partA.totalQty}
-            totalAmount={result.partA.totalAmount}
-            onUpdateRow={(id, field, val) => handleUpdateRow('partA', 'products', id, field, val)}
-            onAddRow={() => handleAddRow('partA', 'products')}
-            onDeleteRow={(id) => handleDeleteRow('partA', 'products', id)}
-            isEditable={true}
-            canAddDelete={true}
-          />
+            {/* Part A Main Products Table (Editable, Add/Delete Enabled) */}
+            <ProductTable
+              title="Part A Products"
+              rows={data.partA.products}
+              amounts={result.partA.productAmounts}
+              totalQty={result.partA.totalQty}
+              totalAmount={result.partA.totalAmount}
+              onUpdateRow={(id, field, val) => handleUpdateRow('partA', 'products', id, field, val)}
+              onAddRow={() => handleAddRow('partA', 'products')}
+              onDeleteRow={(id) => handleDeleteRow('partA', 'products', id)}
+              isEditable={true}
+              canAddDelete={true}
+            />
 
-          {/* Part A Recover Table (Fixed / Non-editable / No Add & Delete) */}
-          <ProductTable
-            title="Part A Recover (Fixed)"
-            rows={data.partA.recovery}
-            amounts={result.partA.recoveryAmounts}
-            totalQty={result.partA.recoverTotalQty}
-            totalAmount={result.partA.recoverTotalAmount}
-            isEditable={false}
-            canAddDelete={false}
-          />
-        </section>
+            {/* Part A Recover Table (Fixed / Non-editable / No Add & Delete) */}
+            <ProductTable
+              title="Part A Recover (Fixed)"
+              rows={data.partA.recovery}
+              amounts={result.partA.recoveryAmounts}
+              totalQty={result.partA.recoverTotalQty}
+              totalAmount={result.partA.recoverTotalAmount}
+              isEditable={false}
+              canAddDelete={false}
+            />
+          </section>
 
-        {/* PART B COLUMN */}
-        <section className="part-card part-b">
-          <div className="part-header">
-            <h2 className="part-title">PART B</h2>
-          </div>
+          {/* PART B COLUMN */}
+          <section className="part-card part-b">
+            <div className="part-header">
+              <h2 className="part-title">PART B</h2>
+            </div>
 
-          {/* Part B Main Products Table (Editable, Add/Delete Enabled) */}
-          <ProductTable
-            title="Part B Products"
-            rows={data.partB.products}
-            amounts={result.partB.productAmounts}
-            totalQty={result.partB.totalQty}
-            totalAmount={result.partB.totalAmount}
-            onUpdateRow={(id, field, val) => handleUpdateRow('partB', 'products', id, field, val)}
-            onAddRow={() => handleAddRow('partB', 'products')}
-            onDeleteRow={(id) => handleDeleteRow('partB', 'products', id)}
-            isEditable={true}
-            canAddDelete={true}
-          />
+            {/* Part B Main Products Table (Editable, Add/Delete Enabled) */}
+            <ProductTable
+              title="Part B Products"
+              rows={data.partB.products}
+              amounts={result.partB.productAmounts}
+              totalQty={result.partB.totalQty}
+              totalAmount={result.partB.totalAmount}
+              onUpdateRow={(id, field, val) => handleUpdateRow('partB', 'products', id, field, val)}
+              onAddRow={() => handleAddRow('partB', 'products')}
+              onDeleteRow={(id) => handleDeleteRow('partB', 'products', id)}
+              isEditable={true}
+              canAddDelete={true}
+            />
 
-          {/* Part B Recover Table (Fixed / Non-editable / No Add & Delete) */}
-          <ProductTable
-            title="Part B Recover (Fixed)"
-            rows={data.partB.recovery}
-            amounts={result.partB.recoveryAmounts}
-            totalQty={result.partB.recoverTotalQty}
-            totalAmount={result.partB.recoverTotalAmount}
-            isEditable={false}
-            canAddDelete={false}
-          />
-        </section>
+            {/* Part B Recover Table (Fixed / Non-editable / No Add & Delete) */}
+            <ProductTable
+              title="Part B Recover (Fixed)"
+              rows={data.partB.recovery}
+              amounts={result.partB.recoveryAmounts}
+              totalQty={result.partB.recoverTotalQty}
+              totalAmount={result.partB.recoverTotalAmount}
+              isEditable={false}
+              canAddDelete={false}
+            />
+          </section>
+        </div>
       </main>
 
       {/* SUMMARY OUTPUTS, LOSS & RATES SECTION */}
