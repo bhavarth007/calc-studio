@@ -41,11 +41,11 @@ export const ProductTable: React.FC<ProductTableProps> = ({
       <table className="calc-table">
         <thead>
           <tr>
-            <th style={{ width: '46%' }}>Quality / Product</th>
-            <th className="num" style={{ width: '17%' }}>QTY</th>
-            <th className="num" style={{ width: '17%' }}>RATE</th>
-            <th className="num" style={{ width: '20%' }}>AMOUNT</th>
-            {canAddDelete && <th style={{ width: '24px' }}></th>}
+            <th style={{ width: '22%' }}>Quality / Product</th>
+            <th className="num" style={{ width: '28%' }}>QTY</th>
+            <th className="num" style={{ width: '28%' }}>RATE</th>
+            <th className="num" style={{ width: '22%' }}>AMOUNT</th>
+            {canAddDelete && <th style={{ width: '32px' }}></th>}
           </tr>
         </thead>
         <tbody>

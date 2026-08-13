@@ -178,6 +178,26 @@ body {
   background: rgba(239, 68, 68, 0.15);
 }
 
+.btn-warning {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+}
+.btn-warning:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(245, 158, 11, 0.35);
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+}
+.btn-success:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.35);
+}
+
 .btn-sm {
   font-size: 0.75rem;
   padding: 0.25rem 0.55rem;
@@ -296,6 +316,7 @@ body {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0 0.25rem;
+  table-layout: fixed;
 }
 
 .calc-table th {
@@ -368,9 +389,22 @@ body {
   box-shadow: 0 0 0 2px var(--primary-glow);
 }
 
+/* Hide native spinner arrows on number inputs for maximum visible width on Android & mobile */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 .table-input.num {
   text-align: right;
   font-family: var(--font-mono);
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  min-width: 75px;
 }
 
 .amount-cell {
@@ -530,6 +564,19 @@ body {
   .header-actions {
     width: 100%;
     justify-content: flex-start;
+  }
+  .calc-table th {
+    padding: 0.35rem 0.25rem;
+    font-size: 0.7rem;
+  }
+  .calc-table td {
+    padding: 0.3rem 0.25rem;
+  }
+  .table-input {
+    padding: 0.25rem 0.3rem;
+  }
+  .table-input.num {
+    min-width: 75px;
   }
 }
 

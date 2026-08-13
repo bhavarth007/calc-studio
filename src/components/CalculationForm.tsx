@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FileText, Save, RotateCcw, Calculator } from 'lucide-react';
+import { FileText, Save, RotateCcw, Calculator, Edit2, Check, Lock } from 'lucide-react';
 import { BASELINE_CALCULATION_DATA, CalculationData, ProductRow } from '../types/calculation';
 import { calculateAll } from '../engine/calculator';
 import { ProductTable } from './ProductTable';
@@ -8,6 +8,7 @@ import { loadCurrentCalculation, saveCalculationRecord, saveCurrentCalculation }
 
 export const CalculationForm: React.FC = () => {
   const [data, setData] = useState<CalculationData>(loadCurrentCalculation);
+  const [isEditMode, setIsEditMode] = useState<boolean>(false);
 
   // Synchronously compute all results using calculator engine
   const result = calculateAll(data);
@@ -124,24 +125,37 @@ export const CalculationForm: React.FC = () => {
             className="header-title-input"
             value={data.title}
             onChange={(e) => handleUpdateTitle(e.target.value)}
-            title="Edit Title"
+            disabled={!isEditMode}
+            title={isEditMode ? "Edit Title" : "Title (Lock Mode)"}
+            style={{ cursor: isEditMode ? 'text' : 'default', opacity: isEditMode ? 1 : 0.85 }}
           />
         </div>
 
         <div className="header-actions">
+          <button
+            type="button"
+            className={`btn ${isEditMode ? 'btn-success' : 'btn-warning'}`}
+            onClick={() => setIsEditMode(!isEditMode)}
+          >
+            {isEditMode ? <Check size={15} /> : <Edit2 size={15} />}
+            {isEditMode ? 'Done Editing' : 'Edit Mode'}
+          </button>
+
           <button type="button" className="btn btn-secondary" onClick={handleExportPDF}>
             <FileText size={15} /> Download PDF
           </button>
           <button type="button" className="btn btn-primary" onClick={handleSaveRecord}>
             <Save size={15} /> Save State
           </button>
-          <button type="button" className="btn btn-secondary" onClick={handleResetBaseline} title="Reset Baseline">
-            <RotateCcw size={15} /> Baseline
-          </button>
+          {isEditMode && (
+            <button type="button" className="btn btn-secondary" onClick={handleResetBaseline} title="Reset Baseline">
+              <RotateCcw size={15} /> Baseline
+            </button>
+          )}
         </div>
       </header>
 
-      {/* Main Single-Page Calculation Form Grid & Summary (100% PC Layout Preserved Inside Scrollable Container) */}
+      {/* Main Single-Page Calculation Form Grid & Summary */}
       <main className="form-grid-wrapper">
         <div className="form-grid">
           {/* PART A COLUMN */}
@@ -150,7 +164,7 @@ export const CalculationForm: React.FC = () => {
               <h2 className="part-title">PART A</h2>
             </div>
 
-            {/* Part A Main Products Table (Editable, Add/Delete Enabled) */}
+            {/* Part A Main Products Table (Editable only in Edit Mode) */}
             <ProductTable
               title="Part A Products"
               rows={data.partA.products}
@@ -160,8 +174,8 @@ export const CalculationForm: React.FC = () => {
               onUpdateRow={(id, field, val) => handleUpdateRow('partA', 'products', id, field, val)}
               onAddRow={() => handleAddRow('partA', 'products')}
               onDeleteRow={(id) => handleDeleteRow('partA', 'products', id)}
-              isEditable={true}
-              canAddDelete={true}
+              isEditable={isEditMode}
+              canAddDelete={isEditMode}
             />
 
             {/* Part A Recover Table (Fixed / Non-editable / No Add & Delete) */}
@@ -182,7 +196,7 @@ export const CalculationForm: React.FC = () => {
               <h2 className="part-title">PART B</h2>
             </div>
 
-            {/* Part B Main Products Table (Editable, Add/Delete Enabled) */}
+            {/* Part B Main Products Table (Editable only in Edit Mode) */}
             <ProductTable
               title="Part B Products"
               rows={data.partB.products}
@@ -192,8 +206,8 @@ export const CalculationForm: React.FC = () => {
               onUpdateRow={(id, field, val) => handleUpdateRow('partB', 'products', id, field, val)}
               onAddRow={() => handleAddRow('partB', 'products')}
               onDeleteRow={(id) => handleDeleteRow('partB', 'products', id)}
-              isEditable={true}
-              canAddDelete={true}
+              isEditable={isEditMode}
+              canAddDelete={isEditMode}
             />
 
             {/* Part B Recover Table (Fixed / Non-editable / No Add & Delete) */}
@@ -225,16 +239,22 @@ export const CalculationForm: React.FC = () => {
             </div>
             <div className="metric-row">
               <span className="metric-label">REAL OUT PUT (User Input):</span>
-              <input
-                type="number"
-                step="any"
-                className="real-output-input"
-                value={data.partA.realOutput !== null ? data.partA.realOutput : ''}
-                placeholder="0"
-                onChange={(e) =>
-                  handleUpdateRealOutput('partA', e.target.value === '' ? null : parseFloat(e.target.value))
-                }
-              />
+              {isEditMode ? (
+                <input
+                  type="number"
+                  step="any"
+                  className="real-output-input"
+                  value={data.partA.realOutput !== null ? data.partA.realOutput : ''}
+                  placeholder="0"
+                  onChange={(e) =>
+                    handleUpdateRealOutput('partA', e.target.value === '' ? null : parseFloat(e.target.value))
+                  }
+                />
+              ) : (
+                <span className="metric-val highlight" style={{ fontFamily: 'var(--font-mono)' }}>
+                  {data.partA.realOutput !== null ? data.partA.realOutput.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '-'}
+                </span>
+              )}
             </div>
             <div className="metric-row">
               <span className="metric-label">LOSS (Output QTY - Real Output):</span>
@@ -262,16 +282,22 @@ export const CalculationForm: React.FC = () => {
             </div>
             <div className="metric-row">
               <span className="metric-label">REAL OUT PUT (User Input):</span>
-              <input
-                type="number"
-                step="any"
-                className="real-output-input"
-                value={data.partB.realOutput !== null ? data.partB.realOutput : ''}
-                placeholder="0"
-                onChange={(e) =>
-                  handleUpdateRealOutput('partB', e.target.value === '' ? null : parseFloat(e.target.value))
-                }
-              />
+              {isEditMode ? (
+                <input
+                  type="number"
+                  step="any"
+                  className="real-output-input"
+                  value={data.partB.realOutput !== null ? data.partB.realOutput : ''}
+                  placeholder="0"
+                  onChange={(e) =>
+                    handleUpdateRealOutput('partB', e.target.value === '' ? null : parseFloat(e.target.value))
+                  }
+                />
+              ) : (
+                <span className="metric-val highlight" style={{ fontFamily: 'var(--font-mono)' }}>
+                  {data.partB.realOutput !== null ? data.partB.realOutput.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) : '-'}
+                </span>
+              )}
             </div>
             <div className="metric-row">
               <span className="metric-label">LOSS (Output QTY - Real Output):</span>
