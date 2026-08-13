@@ -11,7 +11,6 @@ export function exportToPDF(data: CalculationData, result: CalculationResult) {
 
   const primaryColor: [number, number, number] = [15, 23, 42]; // Slate 900
   const accentColor: [number, number, number] = [37, 99, 235]; // Royal Blue
-  const tableHeaderBg: [number, number, number] = [241, 245, 249]; // Slate 100
 
   // Title & Header Banner
   doc.setFillColor(...primaryColor);
@@ -136,7 +135,7 @@ export function exportToPDF(data: CalculationData, result: CalculationResult) {
     ['OUT PUT AMOUNT', result.partA.outputAmount.toFixed(2), result.partB.outputAmount.toFixed(2)],
     ['REAL OUT PUT', result.partA.realOutput.toFixed(2), result.partB.realOutput.toFixed(2)],
     ['LOSS', result.partA.loss.toFixed(2), result.partB.loss.toFixed(2)],
-    ['CALCULATED RATE', result.partA.rate.toFixed(4), result.partB.rate.toFixed(4)],
+    ['CALCULATED RATE', result.partA.rate.toFixed(2), result.partB.rate.toFixed(2)],
   ];
 
   autoTable(doc, {
@@ -162,7 +161,7 @@ export function exportToPDF(data: CalculationData, result: CalculationResult) {
   doc.text('FINAL NET RATE:', 20, currentY + 10.5);
 
   doc.setFontSize(16);
-  doc.text(result.netRate.toFixed(4), 180, currentY + 10.5, { align: 'right' });
+  doc.text(result.netRate.toFixed(2), 180, currentY + 10.5, { align: 'right' });
 
   doc.save(`${data.title || 'calculation_report'}.pdf`);
 }

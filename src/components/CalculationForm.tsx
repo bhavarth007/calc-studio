@@ -214,7 +214,7 @@ export const CalculationForm: React.FC = () => {
             
             <div className="metric-row">
               <span className="metric-label">OUT PUT QTY (Total - Recover):</span>
-              <span className="metric-val">{result.partA.outputQty.toLocaleString('en-US', { maximumFractionDigits: 4 })}</span>
+              <span className="metric-val">{result.partA.outputQty.toLocaleString('en-US', { maximumFractionDigits: 2 })}</span>
             </div>
             <div className="metric-row">
               <span className="metric-label">OUT PUT AMOUNT (Total - Recover):</span>
@@ -236,12 +236,12 @@ export const CalculationForm: React.FC = () => {
             <div className="metric-row">
               <span className="metric-label">LOSS (Output QTY - Real Output):</span>
               <span className="metric-val" style={{ color: result.partA.loss >= 0 ? '#10b981' : '#ef4444' }}>
-                {result.partA.loss.toLocaleString('en-US', { maximumFractionDigits: 4 })}
+                {result.partA.loss.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </span>
             </div>
             <div className="metric-row">
               <span className="metric-label">PART A RATE (Output Amount / Real Output):</span>
-              <span className="metric-val highlight">{result.partA.rate.toFixed(6)}</span>
+              <span className="metric-val highlight">{result.partA.rate.toFixed(2)}</span>
             </div>
           </div>
 
@@ -251,7 +251,7 @@ export const CalculationForm: React.FC = () => {
 
             <div className="metric-row">
               <span className="metric-label">OUT PUT QTY (Total - Recover):</span>
-              <span className="metric-val">{result.partB.outputQty.toLocaleString('en-US', { maximumFractionDigits: 4 })}</span>
+              <span className="metric-val">{result.partB.outputQty.toLocaleString('en-US', { maximumFractionDigits: 2 })}</span>
             </div>
             <div className="metric-row">
               <span className="metric-label">OUT PUT AMOUNT (Total - Recover):</span>
@@ -273,12 +273,12 @@ export const CalculationForm: React.FC = () => {
             <div className="metric-row">
               <span className="metric-label">LOSS (Output QTY - Real Output):</span>
               <span className="metric-val" style={{ color: result.partB.loss >= 0 ? '#10b981' : '#ef4444' }}>
-                {result.partB.loss.toLocaleString('en-US', { maximumFractionDigits: 4 })}
+                {result.partB.loss.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </span>
             </div>
             <div className="metric-row">
               <span className="metric-label">PART B RATE (Output Amount / Real Output):</span>
-              <span className="metric-val highlight">{result.partB.rate.toFixed(6)}</span>
+              <span className="metric-val highlight">{result.partB.rate.toFixed(2)}</span>
             </div>
           </div>
         </div>
@@ -290,11 +290,11 @@ export const CalculationForm: React.FC = () => {
               <Calculator size={20} /> FINAL NET RATE
             </div>
             <div className="net-rate-formula">
-              Formula: (PART A RATE [{result.partA.rate.toFixed(4)}] + PART B RATE [{result.partB.rate.toFixed(4)}]) / 2
+              Formula: (PART A RATE [{result.partA.rate.toFixed(2)}] + PART B RATE [{result.partB.rate.toFixed(2)}]) / 2
             </div>
           </div>
           <div className="net-rate-value-box">
-            {result.netRate.toFixed(6)}
+            {result.netRate.toFixed(2)}
           </div>
         </div>
       </section>
