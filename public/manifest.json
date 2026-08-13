@@ -1,6 +1,6 @@
 {
-  "short_name": "CalcStudio",
-  "name": "XLSX Single-Page Calculation Studio",
+  "short_name": "Calc Studio",
+  "name": "Calc Studio",
   "icons": [
     {
       "src": "/icon-192.png",

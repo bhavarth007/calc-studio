@@ -41,7 +41,7 @@ export interface CalculationResult {
 }
 
 export const BASELINE_CALCULATION_DATA: CalculationData = {
-  title: 'Production Calculation (Baseline source.xlsx)',
+  title: 'Calc Studio',
   partA: {
     products: [
       { id: 'pa-1', quality: 'WATER', qty: 1000, rate: null },
