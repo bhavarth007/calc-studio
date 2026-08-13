@@ -138,7 +138,7 @@ export const CalculationForm: React.FC = () => {
         </div>
       </header>
 
-      {/* Main Single-Page Calculation Form Grid (Preserves PC Side-by-Side Layout Proportions) */}
+      {/* Main Single-Page Calculation Form Grid & Summary (100% PC Layout Preserved Inside Scrollable Container) */}
       <main className="form-grid-wrapper">
         <div className="form-grid">
           {/* PART A COLUMN */}
@@ -205,13 +205,11 @@ export const CalculationForm: React.FC = () => {
             />
           </section>
         </div>
-      </main>
 
-      {/* SUMMARY OUTPUTS, LOSS & RATES SECTION */}
-      <section className="summary-panel">
+        {/* SUMMARY OUTPUTS GRID: PART A SUMMARY (LEFT) & PART B SUMMARY (RIGHT) */}
         <div className="summary-grid">
           {/* Part A Summary Card */}
-          <div className="summary-card">
+          <div className="summary-card part-a">
             <div className="summary-card-title part-a-title">PART A SUMMARY</div>
             
             <div className="metric-row">
@@ -248,7 +246,7 @@ export const CalculationForm: React.FC = () => {
           </div>
 
           {/* Part B Summary Card */}
-          <div className="summary-card">
+          <div className="summary-card part-b">
             <div className="summary-card-title part-b-title">PART B SUMMARY</div>
 
             <div className="metric-row">
@@ -299,7 +297,7 @@ export const CalculationForm: React.FC = () => {
             {result.netRate.toFixed(2)}
           </div>
         </div>
-      </section>
+      </main>
     </div>
   );
 };
