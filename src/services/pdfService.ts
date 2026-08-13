@@ -152,6 +152,8 @@ export function exportToPDF(data: CalculationData, result: CalculationResult) {
   currentY = (doc as any).lastAutoTable.finalY + 8;
 
   // FINAL NET RATE BANNER
+  const roundedNetRate = Math.round(result.netRate);
+
   doc.setFillColor(37, 99, 235);
   doc.rect(14, currentY, 182, 16, 'F');
 
@@ -161,7 +163,7 @@ export function exportToPDF(data: CalculationData, result: CalculationResult) {
   doc.text('FINAL NET RATE:', 20, currentY + 10.5);
 
   doc.setFontSize(16);
-  doc.text(result.netRate.toFixed(2), 180, currentY + 10.5, { align: 'right' });
+  doc.text(roundedNetRate.toFixed(2), 180, currentY + 10.5, { align: 'right' });
 
   doc.save(`${data.title || 'calculation_report'}.pdf`);
 }

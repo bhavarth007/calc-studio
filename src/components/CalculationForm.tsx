@@ -108,6 +108,9 @@ export const CalculationForm: React.FC = () => {
     exportToPDF(data, result);
   };
 
+  // Round up Final Net Rate to whole number formatted with .00
+  const roundedNetRate = Math.round(result.netRate);
+
   return (
     <div className="container">
       {/* Header Bar */}
@@ -294,7 +297,7 @@ export const CalculationForm: React.FC = () => {
             </div>
           </div>
           <div className="net-rate-value-box">
-            {result.netRate.toFixed(2)}
+            {roundedNetRate.toFixed(2)}
           </div>
         </div>
       </main>
