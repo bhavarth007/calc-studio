@@ -41,11 +41,11 @@ export const ProductTable: React.FC<ProductTableProps> = ({
       <table className="calc-table">
         <thead>
           <tr>
-            <th style={{ width: '40%' }}>Quality / Product</th>
-            <th className="num" style={{ width: '20%' }}>QTY</th>
-            <th className="num" style={{ width: '20%' }}>RATE</th>
+            <th style={{ width: '46%' }}>Quality / Product</th>
+            <th className="num" style={{ width: '17%' }}>QTY</th>
+            <th className="num" style={{ width: '17%' }}>RATE</th>
             <th className="num" style={{ width: '20%' }}>AMOUNT</th>
-            {canAddDelete && <th style={{ width: '30px' }}></th>}
+            {canAddDelete && <th style={{ width: '24px' }}></th>}
           </tr>
         </thead>
         <tbody>
@@ -57,13 +57,13 @@ export const ProductTable: React.FC<ProductTableProps> = ({
                   {isEditable && onUpdateRow ? (
                     <input
                       type="text"
-                      className="table-input"
+                      className="table-input quality-input"
                       value={row.quality}
                       placeholder="Product Name"
                       onChange={(e) => onUpdateRow(row.id, 'quality', e.target.value)}
                     />
                   ) : (
-                    <span className="static-text" style={{ paddingLeft: '0.5rem', fontWeight: 500 }}>
+                    <span className="static-text" style={{ paddingLeft: '0.2rem', fontWeight: 500 }}>
                       {row.quality}
                     </span>
                   )}

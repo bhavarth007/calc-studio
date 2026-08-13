@@ -183,12 +183,12 @@ body {
   padding: 0.25rem 0.55rem;
 }
 
-/* Unified Scrollable Wrapper for Form Grid & Summary (PC Side-by-Side Proportions) */
+/* Unified Scrollable Wrapper for Form Grid & Summary (Preserves Full PC Layout Proportions) */
 .form-grid-wrapper {
   width: 100%;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.75rem;
   border-radius: 0.75rem;
 }
 
@@ -197,7 +197,7 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
   width: 100%;
-  min-width: 720px; /* Preserves PC side-by-side proportions for main tables */
+  min-width: 840px; /* Gives 420px to each column so full product names (e.g. CAUSTIC SODA) display cleanly */
 }
 
 .summary-grid {
@@ -205,16 +205,16 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
   width: 100%;
-  min-width: 720px; /* Preserves PC side-by-side proportions for summary cards */
+  min-width: 840px;
   margin-top: 1rem;
 }
 
 .net-rate-banner {
-  min-width: 720px;
+  min-width: 840px;
   margin-top: 1rem;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1024px) {
   .form-grid, .summary-grid, .net-rate-banner {
     min-width: 0;
   }
@@ -306,6 +306,7 @@ body {
   color: var(--text-dim);
   padding: 0.4rem 0.5rem;
   text-align: left;
+  white-space: nowrap;
 }
 
 .calc-table th.num, .calc-table td.num {
@@ -323,7 +324,7 @@ body {
 
 .calc-table td {
   padding: 0.35rem 0.5rem;
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   vertical-align: middle;
 }
 
@@ -339,7 +340,8 @@ body {
 .static-text {
   display: inline-block;
   white-space: nowrap;
-  font-weight: 500;
+  font-weight: 600;
+  color: #f1f5f9;
 }
 
 /* Inputs */
@@ -351,8 +353,13 @@ body {
   padding: 0.3rem 0.45rem;
   border-radius: 0.35rem;
   font-family: var(--font-sans);
-  font-size: 0.82rem;
+  font-size: 0.84rem;
+  font-weight: 500;
   transition: all 0.15s ease;
+}
+
+.table-input.quality-input {
+  font-weight: 600;
 }
 
 .table-input:focus {
@@ -371,7 +378,7 @@ body {
   font-weight: 600;
   color: #38bdf8;
   padding-right: 0.4rem;
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   white-space: nowrap;
 }
 
@@ -385,7 +392,7 @@ body {
   color: var(--text-main);
   border-top: 1px solid rgba(255, 255, 255, 0.15);
   border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-  font-size: 0.82rem;
+  font-size: 0.84rem;
 }
 
 /* Summary Output Panel Cards */
