@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Smartphone, Share, PlusSquare, X, Check, Monitor, Download, ExternalLink, Tablet } from 'lucide-react';
+import { Smartphone, Share, PlusSquare, X, Check, Monitor, Download, Tablet, Sparkles } from 'lucide-react';
 
 interface InstallModalProps {
   isOpen: boolean;
@@ -42,7 +42,7 @@ export const InstallModal: React.FC<InstallModalProps> = ({
             </div>
             <div>
               <h3 className="modal-title">Add Calc Studio to Home Screen</h3>
-              <p className="modal-subtitle">Direct standalone app icon for iPad, Mobile & Desktop</p>
+              <p className="modal-subtitle">Direct app shortcut for iPad, iPhone, Android & Desktop</p>
             </div>
           </div>
           <button className="modal-close-btn" onClick={onClose} aria-label="Close modal">
@@ -54,7 +54,7 @@ export const InstallModal: React.FC<InstallModalProps> = ({
           <div className="install-banner">
             <div className="install-banner-text">
               <strong>Quick 1-Click Install Available</strong>
-              <span>Install Calc Studio directly as a native app on this device.</span>
+              <span>Install Calc Studio directly as an app on this device.</span>
             </div>
             <button className="btn btn-success install-btn" onClick={onTriggerInstall}>
               <Download size={16} /> Install Now
@@ -92,25 +92,27 @@ export const InstallModal: React.FC<InstallModalProps> = ({
                 <li className="step-item">
                   <span className="step-num">1</span>
                   <div className="step-content">
-                    <p>Tap the <strong>Share button</strong> <Share size={16} className="inline-icon" /> at the top or bottom bar in Safari.</p>
+                    <p>Tap the <strong>Share button</strong> <Share size={16} className="inline-icon" /> at the top or bottom toolbar in Safari.</p>
                   </div>
                 </li>
                 <li className="step-item">
                   <span className="step-num">2</span>
                   <div className="step-content">
-                    <p>Scroll down the share menu and select <strong>"Add to Home Screen"</strong> <PlusSquare size={16} className="inline-icon" />.</p>
+                    <p>Scroll down the options menu and select <strong>"Add to Home Screen"</strong> <PlusSquare size={16} className="inline-icon" />.</p>
                   </div>
                 </li>
                 <li className="step-item">
                   <span className="step-num">3</span>
                   <div className="step-content">
-                    <p>Tap <strong>"Add"</strong> in the upper right corner.</p>
+                    <p>Tap <strong>"Add"</strong> in the upper right corner to confirm.</p>
                   </div>
                 </li>
               </ol>
-              <div className="fix-note">
-                <Check size={16} className="text-success" /> 
-                <strong>Fixed 404 Issue:</strong> The app icon will now open directly into <code>https://bhavarth007.github.io/calc-studio/</code> without throwing a 404 error!
+              <div className="pro-tip-note">
+                <Sparkles size={16} className="pro-tip-icon" /> 
+                <div className="pro-tip-text">
+                  <strong>Native Fullscreen App:</strong> The Calc Studio app icon will be added to your home screen and opens directly in full-screen mode!
+                </div>
               </div>
             </div>
           )}
@@ -134,13 +136,15 @@ export const InstallModal: React.FC<InstallModalProps> = ({
                 <li className="step-item">
                   <span className="step-num">3</span>
                   <div className="step-content">
-                    <p>Confirm by tapping <strong>"Add" / "Install"</strong>.</p>
+                    <p>Tap <strong>"Add" / "Install"</strong> to confirm.</p>
                   </div>
                 </li>
               </ol>
-              <div className="fix-note">
-                <Check size={16} className="text-success" /> 
-                Shortcut start location is set to <code>./</code> so it stays cleanly inside <strong>calc-studio</strong>.
+              <div className="pro-tip-note">
+                <Sparkles size={16} className="pro-tip-icon" /> 
+                <div className="pro-tip-text">
+                  <strong>Instant Launcher:</strong> Tap the app icon anytime to open Calc Studio instantly from your home screen.
+                </div>
               </div>
             </div>
           )}
@@ -152,22 +156,28 @@ export const InstallModal: React.FC<InstallModalProps> = ({
                 <li className="step-item">
                   <span className="step-num">1</span>
                   <div className="step-content">
-                    <p>Look at the right side of your browser <strong>address bar</strong> for the <strong>Install Icon</strong> <Download size={16} className="inline-icon" />.</p>
+                    <p>Click the <strong>Install icon</strong> <Download size={16} className="inline-icon" /> on the right side of the browser address bar.</p>
                   </div>
                 </li>
                 <li className="step-item">
                   <span className="step-num">2</span>
                   <div className="step-content">
-                    <p>Click <strong>"Install Calc Studio"</strong> to add it to your Desktop / Taskbar.</p>
+                    <p>Click <strong>"Install Calc Studio"</strong> to pin the app to your Desktop or Taskbar.</p>
                   </div>
                 </li>
               </ol>
+              <div className="pro-tip-note">
+                <Sparkles size={16} className="pro-tip-icon" /> 
+                <div className="pro-tip-text">
+                  <strong>Desktop App:</strong> Opens in a clean, standalone desktop window.
+                </div>
+              </div>
             </div>
           )}
         </div>
 
         <footer className="modal-footer">
-          <button className="btn btn-secondary" onClick={onClose}>
+          <button className="btn btn-primary" onClick={onClose}>
             Got it
           </button>
         </footer>
