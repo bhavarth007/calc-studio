@@ -208,15 +208,18 @@ export const CalculationForm: React.FC = () => {
               canAddDelete={isEditMode}
             />
 
-            {/* Part A Recover Table (Fixed / Non-editable / No Add & Delete) */}
+            {/* Part A Recover Table (Editable in Edit Mode) */}
             <ProductTable
-              title="Part A Recover (Fixed)"
+              title="Part A Recover"
               rows={data.partA.recovery}
               amounts={result.partA.recoveryAmounts}
               totalQty={result.partA.recoverTotalQty}
               totalAmount={result.partA.recoverTotalAmount}
-              isEditable={false}
-              canAddDelete={false}
+              onUpdateRow={(id, field, val) => handleUpdateRow('partA', 'recovery', id, field, val)}
+              onAddRow={() => handleAddRow('partA', 'recovery')}
+              onDeleteRow={(id) => handleDeleteRow('partA', 'recovery', id)}
+              isEditable={isEditMode}
+              canAddDelete={isEditMode}
             />
           </section>
 
@@ -240,15 +243,18 @@ export const CalculationForm: React.FC = () => {
               canAddDelete={isEditMode}
             />
 
-            {/* Part B Recover Table (Fixed / Non-editable / No Add & Delete) */}
+            {/* Part B Recover Table (Editable in Edit Mode) */}
             <ProductTable
-              title="Part B Recover (Fixed)"
+              title="Part B Recover"
               rows={data.partB.recovery}
               amounts={result.partB.recoveryAmounts}
               totalQty={result.partB.recoverTotalQty}
               totalAmount={result.partB.recoverTotalAmount}
-              isEditable={false}
-              canAddDelete={false}
+              onUpdateRow={(id, field, val) => handleUpdateRow('partB', 'recovery', id, field, val)}
+              onAddRow={() => handleAddRow('partB', 'recovery')}
+              onDeleteRow={(id) => handleDeleteRow('partB', 'recovery', id)}
+              isEditable={isEditMode}
+              canAddDelete={isEditMode}
             />
           </section>
         </div>
