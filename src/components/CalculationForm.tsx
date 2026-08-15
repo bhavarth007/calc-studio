@@ -1,17 +1,44 @@
 import React, { useState, useEffect } from 'react';
-import { FileText, Save, RotateCcw, Calculator, Edit2, Check, Lock } from 'lucide-react';
+import { FileText, Save, RotateCcw, Calculator, Edit2, Check, Lock, Smartphone } from 'lucide-react';
 import { BASELINE_CALCULATION_DATA, CalculationData, ProductRow } from '../types/calculation';
 import { calculateAll } from '../engine/calculator';
 import { ProductTable } from './ProductTable';
+import { InstallModal } from './InstallModal';
 import { exportToPDF } from '../services/pdfService';
 import { loadCurrentCalculation, saveCalculationRecord, saveCurrentCalculation } from '../services/storageService';
 
 export const CalculationForm: React.FC = () => {
   const [data, setData] = useState<CalculationData>(loadCurrentCalculation);
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [isInstallModalOpen, setIsInstallModalOpen] = useState<boolean>(false);
+
+  // Listen for native browser PWA install prompt event
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e: Event) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    };
+  }, []);
+
+  const handleTriggerInstall = async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const choiceResult = await deferredPrompt.userChoice;
+      if (choiceResult.outcome === 'accepted') {
+        setDeferredPrompt(null);
+        setIsInstallModalOpen(false);
+      }
+    }
+  };
 
   // Synchronously compute all results using calculator engine
   const result = calculateAll(data);
+
 
   // Auto-save current working state to storage
   useEffect(() => {
@@ -141,6 +168,9 @@ export const CalculationForm: React.FC = () => {
             {isEditMode ? 'Done Editing' : 'Edit Mode'}
           </button>
 
+          <button type="button" className="btn btn-secondary" onClick={() => setIsInstallModalOpen(true)}>
+            <Smartphone size={15} /> Add Shortcut
+          </button>
           <button type="button" className="btn btn-secondary" onClick={handleExportPDF}>
             <FileText size={15} /> Download PDF
           </button>
@@ -327,6 +357,13 @@ export const CalculationForm: React.FC = () => {
           </div>
         </div>
       </main>
+
+      <InstallModal
+        isOpen={isInstallModalOpen}
+        onClose={() => setIsInstallModalOpen(false)}
+        deferredPrompt={deferredPrompt}
+        onTriggerInstall={handleTriggerInstall}
+      />
     </div>
   );
 };
